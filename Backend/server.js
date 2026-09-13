@@ -3,12 +3,17 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 const pool = require('./db');
+const jugadoresRouter = require('./routes/jugadores');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
+
+// rutas de los routers
+app.use('/api/jugadores', jugadoresRouter);
+
 
 app.get('/api/estoy_vivo', async (req, res) => {
     try {
