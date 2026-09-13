@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Gestiona jugadores, videojuegos y puntuaciones de tu torneo." />
+    <title>Torneo Express | Sistema de Torneo de Videojuegos</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/script.js" defer></script>
+  </head>
+  <body>
+    <main class="app-shell">
+      <div class="glow glow-violet" aria-hidden="true"></div>
+      <div class="glow glow-yellow" aria-hidden="true"></div>
+
+      <aside class="brand-panel">
+        <div class="brand-mark" aria-label="Torneo Express"><span>TX</span>
+        </div>
+        <div>
+          <p class="kicker">Sistema de Torneo de Videojuegos</p>
+          <h1>Torneo<br><strong>Express</strong>
+          </h1>
+        </div>
+        <div class="brand-copy">
+          <p>Organiza jugadores, videojuegos y resultados desde un solo lugar.</p>
+          <div class="palette-row" aria-label="Paleta de color">
+            <span class="swatch swatch-white"></span>
+            <span class="swatch swatch-yellow"></span>
+            <span class="swatch swatch-violet"></span>
+          </div>
+        </div>
+      </aside>
+
+      <section class="workspace" aria-labelledby="page-title">
+        <header class="topbar">
+          <div>
+            <p class="kicker">Panel de administración</p>
+            <h2 id="page-title">Gestiona tu torneo</h2>
+          </div>
+        </header>
+
+        <nav class="form-tabs" aria-label="Módulos del torneo">
+          <button class="form-tab is-active" type="button" data-form="players" aria-current="page">
+            <span class="tab-number">01</span><span>Jugadores</span>
+          </button>
+          <button class="form-tab" type="button" data-form="games">
+            <span class="tab-number">02</span><span>Videojuegos</span>
+          </button>
+          <button class="form-tab" type="button" data-form="scores">
+            <span class="tab-number">03</span><span>Puntuaciones</span>
+          </button>
+          <button class="form-tab" type="button" data-form="players-query">
+            <span class="tab-number">04</span><span>Jugadores</span>
+          </button>
+          <button class="form-tab" type="button" data-form="ranking">
+            <span class="tab-number">05</span><span>Ranking</span>
+          </button>
+          <button class="form-tab" type="button" data-form="stats">
+            <span class="tab-number">06</span><span>Estadísticas</span>
+          </button>
+        </nav>
+
+        <div class="form-card">
+          <div class="card-heading">
+            <div>
+              <p class="eyebrow" id="form-eyebrow">Módulo 01</p>
+              <h3 id="form-title">Registrar jugador</h3>
+            <p class="card-description" id="form-description">Crea el perfil de cada competidor para habilitarlo en el torneo.</p>
+          </div>
+          <span class="required-note">
+            <span>*</span> Campos obligatorios</span>
+        </div>
+          <div class="notice" id="notice" role="status" hidden></div>
+          <form id="tournament-form" novalidate></form>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
