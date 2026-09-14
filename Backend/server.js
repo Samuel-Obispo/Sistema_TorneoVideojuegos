@@ -4,6 +4,7 @@ const cors = require('cors');
 require('dotenv').config();
 const pool = require('./db');
 const jugadoresRouter = require('./routes/jugadores');
+const videojuegosRouter = require('./routes/videojuegos');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -13,6 +14,8 @@ app.use(express.json());
 
 // rutas de los routers
 app.use('/api/jugadores', jugadoresRouter);
+app.use('/api/videojuegos', videojuegosRouter);
+
 
 
 app.get('/api/estoy_vivo', async (req, res) => {
