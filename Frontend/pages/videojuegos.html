@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Videojuegos · TorneoGame</title>
+  <link rel="stylesheet" href="../css/global.css" />
+  <link rel="stylesheet" href="../css/videojuegos.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+              <a href="jugadores.html" class="brand">
+        <span class="brand-mark">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="4"/><line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/><line x1="15" y1="13" x2="15.01" y2="13"/><line x1="18" y1="11" x2="18.01" y2="11"/></svg>
+        </span>
+        <span class="brand-text">Torneo<em>Game</em></span>
+      </a>
+      <nav class="mainnav">
+        <a href="jugadores.html">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Jugadores
+        </a>
+        <a href="videojuegos.html" class="active">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="4"/><line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/><line x1="15" y1="13" x2="15.01" y2="13"/><line x1="18" y1="11" x2="18.01" y2="11"/></svg>
+          Videojuegos
+        </a>
+        <a href="puntuaciones.html">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+          Puntuaciones
+        </a>
+        <a href="ranking.html">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+          Ranking
+        </a>
+        <a href="estadisticas.html">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+          Estadísticas
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="page-head">
+      <div>
+        <span class="eyebrow">Módulo · Videojuegos</span>
+        <h1 class="page-title">Gestión de <em>videojuegos</em></h1>
+        <p class="page-subtitle">Registra los títulos con su género o consulta el catálogo.</p>
+      </div>
+    </div>
+
+    <div class="tabs" role="tablist">
+      <button class="tab active" data-tab="registrar" role="tab">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Registrar
+      </button>
+      <button class="tab" data-tab="ver" role="tab">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+        Ver videojuegos
+      </button>
+    </div>
+
+    <section class="tab-panel active" data-panel="registrar">
+      <div class="card" style="width: 100%; max-width: 100%;">
+        <div class="card-head">
+          <span class="chip">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+          <div>
+            <h2>Nuevo videojuego</h2>
+            <p>El nombre debe ser único</p>
+          </div>
+        </div>
+
+        <form id="formJuego">
+          <div class="form-row">
+            <label for="nombreJuego">Nombre</label>
+            <input type="text" id="nombreJuego" required placeholder="Ej. Tekken 8" maxlength="100" />
+          </div>
+          <div class="form-row">
+            <label for="genero">Género</label>
+            <input type="text" id="genero" required placeholder="Ej. Pelea, FPS, MOBA..." maxlength="50" />
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Guardar videojuego
+          </button>
+          <div class="mensaje" id="msgJuego"></div>
+        </form>
+      </div>
+    </section>
+
+    <section class="tab-panel" data-panel="ver">
+      <div class="card">
+        <div class="card-head">
+          <span class="chip">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+          </span>
+          <div>
+            <h2>Catálogo</h2>
+            <p id="contadorJuegos">Cargando...</p>
+          </div>
+        </div>
+
+        <div class="search-bar">
+          <span class="search-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          </span>
+          <input type="text" id="buscarJuego" placeholder="Buscar por nombre o género..." autocomplete="off" />
+        </div>
+
+        <div class="table-wrap">
+          <table id="tablaJuegos">
+            <thead>
+              <tr><th>ID</th><th>Nombre</th><th>Género</th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/tabs.js"></script>
+  <script src="../js/videojuegos.js"></script>
+</body>
+</html>

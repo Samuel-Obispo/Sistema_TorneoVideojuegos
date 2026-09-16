@@ -1,0 +1,15 @@
+.form-narrow { max-width: 520px; margin: 0 auto; }
+
+#tablaJuegos tbody tr td:nth-child(2) {
+  font-weight: 600;
+  color: var(--dark);
+}
+#tablaJuegos tbody tr td:first-child {
+  color: var(--text-muted);
+  font-family: ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.82rem;
+}
+#tablaJuegos tbody tr td:nth-child(3) {
+  color: var(--primary);
+  font-weight: 500;
+}
