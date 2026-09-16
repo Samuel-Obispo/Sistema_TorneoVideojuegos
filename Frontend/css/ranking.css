@@ -1,0 +1,46 @@
+.filter-bar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.filter-left { display: flex; flex-direction: column; gap: 0.4rem; }
+.filter-left label {
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.09em; text-transform: uppercase;
+  color: var(--text-soft);
+}
+.filter-left select {
+  padding: 0.7rem 0.9rem;
+  background: var(--bg-subtle);
+  border: 1.5px solid transparent;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  color: var(--dark);
+  min-width: 240px;
+  outline: none;
+  transition: all 0.15s ease;
+}
+.filter-left select:focus {
+  background: #fff;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(115,106,134,0.12);
+}
+
+#tablaRanking td:first-child {
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: var(--text-soft);
+  font-variant-numeric: tabular-nums;
+}
+.pos-1 { color: #8a6a1e !important; }
+.pos-2 { color: #6b6b78 !important; }
+.pos-3 { color: #9c6a3e !important; }
+
+#tablaRanking tbody tr:nth-child(1) td { background: linear-gradient(90deg, rgba(212,202,197,0.35), transparent 60%); }
+#tablaRanking tbody tr:nth-child(2) td { background: linear-gradient(90deg, rgba(200,206,214,0.35), transparent 60%); }
+#tablaRanking tbody tr:nth-child(3) td { background: linear-gradient(90deg, rgba(212,202,197,0.20), transparent 60%); }
