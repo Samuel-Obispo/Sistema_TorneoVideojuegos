@@ -5,6 +5,7 @@ require('dotenv').config();
 const pool = require('./db');
 const jugadoresRouter = require('./routes/jugadores');
 const videojuegosRouter = require('./routes/videojuegos');
+const puntuacionesRouter = require('./routes/puntuaciones');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -15,6 +16,7 @@ app.use(express.json());
 // rutas de los routers
 app.use('/api/jugadores', jugadoresRouter);
 app.use('/api/videojuegos', videojuegosRouter);
+app.use('/api/puntuaciones', puntuacionesRouter);
 
 
 
