@@ -36,18 +36,21 @@ function renderResultados(lista) {
   `).join('');
 }
 
-function buscar() {
-  const q = input.value.trim().toLowerCase();
+async function buscar() {
+  const q = input.value.trim();
   if (!q) {
     resultados.innerHTML = '<p class="table-empty">Realiza una búsqueda para ver resultados</p>';
     contador.textContent = 'Esperando búsqueda';
     return;
   }
-  const filtrados = cacheJugadores.filter(j =>
-    (j.nombre   || '').toLowerCase().includes(q) ||
-    (j.gamertag || '').toLowerCase().includes(q)
-  );
-  renderResultados(filtrados);
+
+  try {
+    const filtrados = await API.get(`/jugadores/buscar_jugador?q=${encodeURIComponent(q)}`);
+    renderResultados(filtrados);
+  } catch (e) {
+    console.error(e);
+    resultados.innerHTML = `<p class="table-empty">Error al buscar: ${e.message}</p>`;
+  }
 }
 
 formBuscar.addEventListener('submit', (e) => { e.preventDefault(); buscar(); });

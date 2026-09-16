@@ -20,8 +20,8 @@ function renderTabla(lista) {
     return;
   }
   tbodyPun.innerHTML = lista.map(p => {
-    const gamertag = p.gamertag   || p.jugador || mapJug[p.id_jugador]    || `#${p.id_jugador}`;
-    const juego    = p.videojuego || p.juego   || mapJue[p.id_videojuego] || `#${p.id_videojuego}`;
+    const gamertag = p.gamertag_jugador || p.nombre_jugador || mapJug[p.id_jugador]    || `#${p.id_jugador}`;
+    const juego    = p.nombre_videojuego || p.juego   || mapJue[p.id_videojuego] || `#${p.id_videojuego}`;
     return `
       <tr>
         <td>${gamertag}</td>
@@ -35,13 +35,17 @@ function renderTabla(lista) {
 
 function aplicarBusqueda() {
   const q = (inputBuscar?.value || '').trim().toLowerCase();
-  if (!q) { renderTabla(cachePuntajes); return; }
-
+  if (!q) { 
+    renderTabla(cachePuntajes); 
+    return; 
+  }
   const filtrados = cachePuntajes.filter(p => {
-    const gamertag = (p.gamertag || p.jugador || mapJug[p.id_jugador] || '').toLowerCase();
-    const juego    = (p.videojuego || p.juego || mapJue[p.id_videojuego] || '').toLowerCase();
+    const gamertag = (p.gamertag_jugador || p.nombre_jugador || mapJug[p.id_jugador] || '').toLowerCase();
+    const juego    = (p.nombre_videojuego || mapJue[p.id_videojuego] || '').toLowerCase();
+    
     return gamertag.includes(q) || juego.includes(q);
   });
+
   renderTabla(filtrados);
 }
 
