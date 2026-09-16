@@ -6,6 +6,7 @@ const pool = require('./db');
 const jugadoresRouter = require('./routes/jugadores');
 const videojuegosRouter = require('./routes/videojuegos');
 const puntuacionesRouter = require('./routes/puntuaciones');
+const rankingRouter = require('./routes/ranking');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use('/api/jugadores', jugadoresRouter);
 app.use('/api/videojuegos', videojuegosRouter);
 app.use('/api/puntuaciones', puntuacionesRouter);
+app.use('/api/ranking', rankingRouter);
 
 
 
