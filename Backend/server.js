@@ -7,6 +7,7 @@ const jugadoresRouter = require('./routes/jugadores');
 const videojuegosRouter = require('./routes/videojuegos');
 const puntuacionesRouter = require('./routes/puntuaciones');
 const rankingRouter = require('./routes/ranking');
+const estadisticasRouter = require('./routes/estadisticas');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -19,7 +20,7 @@ app.use('/api/jugadores', jugadoresRouter);
 app.use('/api/videojuegos', videojuegosRouter);
 app.use('/api/puntuaciones', puntuacionesRouter);
 app.use('/api/ranking', rankingRouter);
-
+app.use('/api/estadisticas', estadisticasRouter);
 
 
 app.get('/api/estoy_vivo', async (req, res) => {
