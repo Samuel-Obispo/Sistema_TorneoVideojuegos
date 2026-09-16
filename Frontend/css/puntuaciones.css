@@ -1,0 +1,11 @@
+.form-narrow { max-width: 520px; margin: 0 auto; }
+
+#tablaPuntuaciones tbody tr td:first-child {
+  font-weight: 600;
+  color: var(--primary);
+}
+#tablaPuntuaciones td:nth-child(4) {
+  color: var(--text-soft);
+  font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
+}
