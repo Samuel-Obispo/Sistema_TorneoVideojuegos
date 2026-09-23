@@ -1,34 +1,26 @@
-
 const tbodyRank = document.querySelector('#tablaRanking tbody');
 const filtro    = document.getElementById('filtroJuego');
 const btnRef    = document.getElementById('btnRefrescar');
 
-let cacheJugadores = [];
-let cacheJuegos    = [];
-let cachePuntajes  = [];
-
-async function cargarDatosBase() {
-  const [jugadores, juegos, puntuaciones] = await Promise.all([
-    API.get('/jugadores'),
-    API.get('/videojuegos'),
-    API.get('/puntuaciones')
-  ]);
-  cacheJugadores = Array.isArray(jugadores) ? jugadores : [];
-  cacheJuegos    = Array.isArray(juegos)    ? juegos    : [];
-  cachePuntajes  = Array.isArray(puntuaciones) ? puntuaciones : [];
-}
-
-function cargarFiltroJuegos() {
-  filtro.innerHTML = '<option value="">Todos los videojuegos</option>' +
-    cacheJuegos.map(v =>
-      `<option value="${v.id_videojuego ?? v.id}">${v.nombre}</option>`
-    ).join('');
+async function cargarFiltroJuegos() {
+  try {
+    const juegos = await API.get('/videojuegos');
+    const cacheJuegos = Array.isArray(juegos) ? juegos : [];
+    filtro.innerHTML = '<option value="">Todos los videojuegos</option>' +
+      cacheJuegos.map(v =>
+        `<option value="${v.id_videojuego ?? v.id}">${escapeHTML(v.nombre)}</option>`
+      ).join('');
+  } catch (e) {
+    console.error('Error al cargar catálogo de juegos para el filtro:', e);
+  }
 }
 
 async function refrescar() {
   tbodyRank.innerHTML = `<tr><td colspan="4" class="table-empty">Cargando...</td></tr>`;
   try {
-    const rankingData = await API.get('/ranking');
+    const idJuego = filtro.value;
+    const endpoint = idJuego ? `/ranking?id_videojuego=${idJuego}` : '/ranking';
+    const rankingData = await API.get(endpoint);
     renderRanking(rankingData);
   } catch (e) {
     console.error(e);
@@ -47,16 +39,18 @@ function renderRanking(lista) {
     return `
       <tr>
         <td class="${clase}">#${row.posicion}</td>
-        <td>${row.jugador}</td>
-        <td>${row.videojuego}</td>
+        <td>${escapeHTML(row.jugador)}</td>
+        <td>${escapeHTML(row.videojuego)}</td>
         <td><span class="puntos-badge">${row.puntuacion}</span></td>
       </tr>
     `;
   }).join('');
 }
 
-
-filtro.addEventListener('change', renderRanking);
+filtro.addEventListener('change', refrescar);
 btnRef.addEventListener('click', refrescar);
 
-refrescar();
+(async () => {
+  await cargarFiltroJuegos();
+  await refrescar();
+})();

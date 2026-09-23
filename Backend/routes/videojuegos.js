@@ -12,8 +12,20 @@ router.post('/', authMiddleware, async (req, res) => {
     if (!nombre || !genero) {
         return res.status(400).json({ error: 'Todos los campos son obligatorios' });
     }
+
     nombre = nombre.trim();
     genero = genero.trim();
+
+    if (nombre.length < 2 || genero.length < 2) {
+        return res.status(400).json({ error: 'El nombre y el género deben tener al menos 2 caracteres' });
+    }
+
+    const TEXT_REGEX = /^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s:\-\.]+$/;
+
+    if (!TEXT_REGEX.test(nombre) || !TEXT_REGEX.test(genero)) {
+        return res.status(400).json({ error: 'El nombre o género contienen caracteres no válidos' });
+    }
+
     try {
         const [existente] = await pool.query('SELECT id_videojuego FROM videojuegos WHERE nombre = ?', [nombre]);
         if (existente.length > 0) {

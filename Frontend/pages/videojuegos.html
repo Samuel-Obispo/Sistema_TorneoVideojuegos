@@ -37,6 +37,9 @@
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
           Ranking
         </a>
+        <button id="btnLogout" class="btn-logout" style="background:none; border:none; color:var(--text-muted); cursor:pointer; padding:0.5rem 1rem; font-size:0.9rem;">
+          Salir
+        </button>
         
       </nav>
     </div>
@@ -113,7 +116,12 @@
         <div class="table-wrap">
           <table id="tablaJuegos">
             <thead>
-              <tr><th>ID</th><th>Nombre</th><th>Género</th></tr>
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Género</th>
+                <th>Acciones</th>
+              </tr>
             </thead>
             <tbody></tbody>
           </table>

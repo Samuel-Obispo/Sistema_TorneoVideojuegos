@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db');
+const pool = require('../db');
 
 
 // Este archivo es para mostrar el ranking de los jugadores de mayor a menor

@@ -27,9 +27,9 @@ function renderResultados(lista) {
   resultados.innerHTML = lista.map(j => `
     <div class="resultado-item">
       <div class="resultado-info">
-        <span class="gamertag">${j.gamertag}</span>
-        <span class="nombre">${j.nombre}</span>
-        <span class="correo">${j.correo}</span>
+        <span class="gamertag">${escapeHTML(j.gamertag)}</span>
+        <span class="nombre">${escapeHTML(j.nombre)}</span>
+        <span class="correo">${escapeHTML(j.correo)}</span>
       </div>
       <span class="fecha">Registrado: ${formatearFecha(j.fecha_registro)}</span>
     </div>
