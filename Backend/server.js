@@ -8,14 +8,26 @@ const videojuegosRouter = require('./routes/videojuegos');
 const puntuacionesRouter = require('./routes/puntuaciones');
 const rankingRouter = require('./routes/ranking');
 const estadisticasRouter = require('./routes/estadisticas');
+const authRouter = require('./routes/auth');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use(helmet())
 app.use(cors());
 app.use(express.json());
 
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, 
+    max: 100,
+    message: { error: 'Demasiadas peticiones, intente de nuevo más tarde' }
+});
+app.use('/api/', limiter);
+
 // rutas de los routers
+app.use('/api/auth', authRouter);
 app.use('/api/jugadores', jugadoresRouter);
 app.use('/api/videojuegos', videojuegosRouter);
 app.use('/api/puntuaciones', puntuacionesRouter);

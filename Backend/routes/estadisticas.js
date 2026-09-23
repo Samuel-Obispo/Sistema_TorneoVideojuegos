@@ -17,11 +17,8 @@ router.get('/', async (req, res) => {
         const [rows] = await pool.query(query);
         res.json(rows[0]);
     } catch (error) {
-        console.error('Error al obtener estadisticas:', error);
-        res.status(500).json({ 
-            error: 'Error al obtener estadisticas', 
-            detalle: error.message 
-        });
+        console.error('Error al obtener estadísticas:', error);
+        res.status(500).json({ error: 'Error interno al obtener estadísticas' });
     }
 });
 

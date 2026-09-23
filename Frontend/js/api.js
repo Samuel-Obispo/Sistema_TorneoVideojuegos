@@ -1,9 +1,25 @@
-
 const BASE_URL = 'http://localhost:3000/api';
+
+function escapeHTML(str) {
+  if (str === null || str === undefined) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
 
 const API = {
   async request(method, endpoint, body = null) {
-    const options = { method, headers: { 'Content-Type': 'application/json' } };
+    const token = localStorage.getItem('token');
+    
+    const headers = { 'Content-Type': 'application/json' };
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
+    }
+
+    const options = { method, headers };
     if (body) options.body = JSON.stringify(body);
 
     const res = await fetch(BASE_URL + endpoint, options);

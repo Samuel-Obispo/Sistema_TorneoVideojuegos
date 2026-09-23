@@ -1,46 +1,123 @@
-
 const express = require('express');
 const router = express.Router();
-const db = require('../db');
+const pool = require('../db');
+const authMiddleware = require('../middleware/authMiddleware');
 
 
+// Esta parte de codifgo es para registrar videojuegos por POST
 
-// Este bloque de codigo es para registrar los videojuegos
-
-router.post('/', async (req, res) => {
-    const { nombre, genero } = req.body;
+router.post('/', authMiddleware, async (req, res) => {
+    let { nombre, genero } = req.body;
 
     if (!nombre || !genero) {
-        return res.status(400).json({ error: 'Faltan campos que son obligatorios' });
+        return res.status(400).json({ error: 'Todos los campos son obligatorios' });
     }
+
+    nombre = nombre.trim();
+    genero = genero.trim();
+
+    if (nombre.length < 2 || genero.length < 2) {
+        return res.status(400).json({ error: 'El nombre y el género deben tener al menos 2 caracteres' });
+    }
+
+    const TEXT_REGEX = /^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s:\-\.]+$/;
+
+    if (!TEXT_REGEX.test(nombre) || !TEXT_REGEX.test(genero)) {
+        return res.status(400).json({ error: 'El nombre o género contienen caracteres no válidos' });
+    }
+
     try {
-        const [existenteVideojuego] = await db.query('SELECT * FROM videojuegos WHERE nombre = ?', [nombre]);
-        if (existenteVideojuego.length > 0) {
+        const [existente] = await pool.query('SELECT id_videojuego FROM videojuegos WHERE nombre = ?', [nombre]);
+        if (existente.length > 0) {
             return res.status(400).json({ error: 'El videojuego ya está registrado' });
         }
-        const [resultado] = await db.query(
+
+        const [resultado] = await pool.query(
             'INSERT INTO videojuegos (nombre, genero) VALUES (?, ?)',
             [nombre, genero]
         );
-        res.status(201).json({ message: 'Videojuego registrado exitosamente', id: resultado.insertId });
+
+        res.status(201).json({
+            message: 'Videojuego registrado correctamente',
+            id: resultado.insertId
+        });
     } catch (error) {
         console.error('Error al registrar el videojuego:', error);
-        res.status(500).json({ error: 'Error al registrar', detalle: error.message });
+        res.status(500).json({ error: 'Error al registrar el videojuego' });
     }
 });
 
 
-// Esta parte de codigo es para tener todos los videojuegos
+// Esta parte de codigo sirve para obtener todos lo videojuegos por GET
 
 router.get('/', async (req, res) => {
     try {
-        const [rows] = await db.query('SELECT * FROM videojuegos');
+        const [rows] = await pool.query('SELECT * FROM videojuegos ORDER BY nombre ASC');
         res.json(rows);
     } catch (error) {
         console.error('Error al obtener los videojuegos:', error);
-        res.status(500).json({ error: 'Error al obtener los videojuegos' });
+        res.status(500).json({ error: 'Error interno al obtener los videojuegos' });
     }
 });
 
+
+// Esta parte de para actualizar videojuegos por PUT
+
+router.put('/:id', authMiddleware, async (req, res) => {
+    const { id } = req.params;
+    let { nombre, genero } = req.body;
+
+    if (!nombre || !genero) {
+        return res.status(400).json({ error: 'Todos los campos son obligatorios' });
+    }
+
+    nombre = nombre.trim();
+    genero = genero.trim();
+
+    try {
+        const [existente] = await pool.query('SELECT * FROM videojuegos WHERE id_videojuego = ?', [id]);
+        if (existente.length === 0) {
+            return res.status(404).json({ error: 'El videojuego no existe' });
+        }
+
+        const [dupNombre] = await pool.query(
+            'SELECT id_videojuego FROM videojuegos WHERE nombre = ? AND id_videojuego != ?',
+            [nombre, id]
+        );
+        if (dupNombre.length > 0) {
+            return res.status(400).json({ error: 'Ya existe otro videojuego con ese nombre' });
+        }
+
+        await pool.query(
+            'UPDATE videojuegos SET nombre = ?, genero = ? WHERE id_videojuego = ?',
+            [nombre, genero, id]
+        );
+
+        res.json({ message: 'Videojuego actualizado exitosamente' });
+    } catch (error) {
+        console.error('Error al actualizar el videojuego:', error);
+        res.status(500).json({ error: 'Error interno al actualizar el videojuego' });
+    }
+});
+
+
+// Esta parte de codigo es para eliminar videojuegos por DELETE
+
+router.delete('/:id', authMiddleware, async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const [existente] = await pool.query('SELECT * FROM videojuegos WHERE id_videojuego = ?', [id]);
+        if (existente.length === 0) {
+            return res.status(404).json({ error: 'El videojuego no existe' });
+        }
+
+        await pool.query('DELETE FROM videojuegos WHERE id_videojuego = ?', [id]);
+        res.json({ message: 'Videojuego eliminado exitosamente' });
+    } catch (error) {
+        console.error('Error al eliminar el videojuego:', error);
+        res.status(500).json({ error: 'Error interno al eliminar el videojuego' });
+    }
+});
 
 module.exports = router;
