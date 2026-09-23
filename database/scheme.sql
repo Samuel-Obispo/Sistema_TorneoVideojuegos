@@ -1,3 +1,17 @@
+CREATE DATABASE torneo_videojuegos;
+
+USE torneo_videojuegos;
+
+CREATE TABLE `usuarios` (
+  `id_usuario` INT NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(100) NOT NULL,
+  `correo` VARCHAR(100) NOT NULL,
+  `password_hash` VARCHAR(255) NOT NULL,
+  `creado_en` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_usuario`),
+  UNIQUE KEY `uk_usuarios_correo` (`correo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 CREATE TABLE `jugadores` (
   `id_jugador` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) NOT NULL,

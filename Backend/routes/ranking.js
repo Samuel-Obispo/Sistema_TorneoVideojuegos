@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
             ORDER BY p.puntuacion DESC;
         `;
         
-        const [rows] = await db.query(query);
+        const [rows] = await pool.query(query);
 
         const ranking = rows.map((row, index) => ({
             posicion: index + 1,
@@ -30,7 +30,7 @@ router.get('/', async (req, res) => {
         res.json(ranking);
     } catch (error) {
         console.error('Error al obtener el ranking:', error);
-        res.status(500).json({ error: 'Error interno del servidor al consultar el ranking' });
+        res.status(500).json({ error: 'Error interno al consultar el ranking' });
     }
 });
 
