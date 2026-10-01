@@ -1,4 +1,3 @@
-// Alternar entre pestañas Login / Register
 const tabLogin = document.getElementById('tabLogin');
 const tabRegister = document.getElementById('tabRegister');
 const formLogin = document.getElementById('formLogin');
@@ -18,7 +17,6 @@ tabRegister?.addEventListener('click', () => {
   formLogin.classList.remove('active');
 });
 
-// 1. INICIAR SESIÓN (POST /api/auth/login)
 formLogin?.addEventListener('submit', async (e) => {
   e.preventDefault();
   const msg = document.getElementById('msgLogin');
@@ -36,7 +34,6 @@ formLogin?.addEventListener('submit', async (e) => {
   }
 });
 
-// 2. REGISTRARSE (POST /api/auth/register)
 formRegister?.addEventListener('submit', async (e) => {
   e.preventDefault();
   const msg = document.getElementById('msgRegister');
@@ -46,7 +43,6 @@ formRegister?.addEventListener('submit', async (e) => {
   const password = document.getElementById('regPassword').value.trim();
 
   try {
-    // Envía exactamente las 3 llaves requeridas por auth.js: nombre, correo y password
     await API.post('/auth/register', { nombre, correo, password });
     
     msg.textContent = '¡Cuenta creada! Ya puedes iniciar sesión.';

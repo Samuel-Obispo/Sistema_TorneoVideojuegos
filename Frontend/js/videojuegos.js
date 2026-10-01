@@ -58,7 +58,6 @@ async function cargarJuegos() {
   }
 }
 
-// 1. CREAR (POST)
 formJuego?.addEventListener('submit', async (e) => {
   e.preventDefault();
 
@@ -82,7 +81,6 @@ formJuego?.addEventListener('submit', async (e) => {
   }
 });
 
-// 2. ACTUALIZAR (PUT)
 async function editarJuego(id, nombreActual, generoActual) {
   const nuevoNombre = prompt('Nuevo nombre del videojuego:', nombreActual);
   if (nuevoNombre === null) return;
@@ -104,7 +102,6 @@ async function editarJuego(id, nombreActual, generoActual) {
   }
 }
 
-// 3. ELIMINAR (DELETE)
 async function eliminarJuego(id) {
   if (!confirm('¿Estás seguro de eliminar este videojuego?')) return;
 

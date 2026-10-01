@@ -59,7 +59,6 @@ async function cargarJugadores() {
   }
 }
 
-// 1. CREAR (POST)
 formJugador?.addEventListener('submit', async (e) => {
   e.preventDefault();
 
@@ -84,7 +83,6 @@ formJugador?.addEventListener('submit', async (e) => {
   }
 });
 
-// 2. ACTUALIZAR (PUT)
 async function editarJugador(id, gamertagActual, nombreActual, correoActual) {
   const nuevoGamertag = prompt('Nuevo Gamertag:', gamertagActual);
   if (nuevoGamertag === null) return;
@@ -113,7 +111,6 @@ async function editarJugador(id, gamertagActual, nombreActual, correoActual) {
   }
 }
 
-// 3. ELIMINAR (DELETE)
 async function eliminarJugador(id) {
   if (!confirm('¿Estás seguro de eliminar este jugador?')) return;
 

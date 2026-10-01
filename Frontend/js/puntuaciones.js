@@ -103,7 +103,6 @@ async function cargarPuntuaciones() {
   }
 }
 
-// 1. CREAR (POST)
 formPun?.addEventListener('submit', async (e) => {
   e.preventDefault();
 
@@ -132,7 +131,6 @@ formPun?.addEventListener('submit', async (e) => {
   }
 });
 
-// 2. ACTUALIZAR (PUT)
 async function editarPuntuacion(id, puntosActuales) {
   const nuevaPuntuacion = prompt('Nueva puntuación:', puntosActuales);
   if (nuevaPuntuacion === null) return;
@@ -152,7 +150,6 @@ async function editarPuntuacion(id, puntosActuales) {
   }
 }
 
-// 3. ELIMINAR (DELETE)
 async function eliminarPuntuacion(id) {
   if (!confirm('¿Estás seguro de eliminar esta puntuación?')) return;
 
